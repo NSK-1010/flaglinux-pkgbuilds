@@ -1,0 +1,43 @@
+# Maintainer: NSK-1010 <kotone.olin1010@gmail.com>
+# Maintainer: Yamada Hayao <hayao@fascode.net>
+# Contributor: NSK-1010 <kotone.olin1010@gmail.com>
+# Contributor: YamaD <yamad.linuxer@gmail.com>
+
+pkgname=plymouth-theme-flag
+_themename=flag
+_pkgname=plymouth-theme-flag
+
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="Flag Linux用のplymouthテーマ"
+arch=('any')
+url=https://github.com/NSK-1010/${pkgname}
+license=('GPL')
+depends=('plymouth')
+optdepends=()
+source=("${url}/archive/${pkgver}.zip")
+md5sums=('SKIP')
+conflicts=("${pkgname}-git")
+
+
+prepare () {
+    cd "${srcdir}"
+    mv ${_pkgname}-${pkgver}/${_themename} ./
+    rm -rf "${_pkgname}-${pkgver}"
+    rm ./${pkgver}.zip
+}
+
+build () {
+    cd "${srcdir}"
+    mkdir -p ./usr/share/plymouth/themes/${_themename}/
+    cp -r ./${_themename}/intro/* ./usr/share/plymouth/themes/${_themename}/
+    cp -r ./${_themename}/loop/* ./usr/share/plymouth/themes/${_themename}/
+    cp -r ./${_themename}/misc/* ./usr/share/plymouth/themes/${_themename}/
+
+    rm -rf ${_themename}
+}
+
+package() {
+    mkdir -p "$pkgdir"
+    cp -r * "$pkgdir"
+}

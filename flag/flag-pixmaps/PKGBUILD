@@ -1,0 +1,18 @@
+# Maintainer : NSK-1010 <kotone.olin1010@gmail.com>
+# Maintainer : Yamada Hayao <development@fascode.net>
+# Maintainer : lap1sid <development@fascode.net>
+
+pkgname=flag-pixmaps
+pkgver=1.0.0
+pkgrel=1
+pkgdesc='Flag Linux pixmaps'
+arch=('any')
+source=("flag.svg")
+
+sha256sums=('SKIP')
+package() {
+    cd "${srcdir}"
+
+    # Install images
+    install -Dm644 "${srcdir}/flag.svg" "${pkgdir}/usr/share/pixmaps/flag.svg"
+}

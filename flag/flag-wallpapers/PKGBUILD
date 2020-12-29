@@ -1,0 +1,51 @@
+# Maintainer : NSK-1010 <kotone.olin1010@gmail.com>
+# Maintainer : Yamada Hayao <development@fascode.net>
+# Maintainer : lap1sid <development@fascode.net>
+
+pkgname=flag-wallpapers
+pkgver=1.0.0
+pkgrel=3
+pkgdesc='Flag Linux wallpapers'
+arch=('any')
+source=("background-1.jpg"
+        "background-2.jpg"
+        "background-3.jpg"
+        "background-4.jpg"
+        "background-5.jpg"
+        "${pkgname}"
+        "${pkgname}-xfce-blue.hook"
+        "${pkgname}-xfce-stripes.hook"
+        "${pkgname}-xfce-teal.hook")
+
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP')
+package() {
+    cd "${srcdir}"
+
+    # Install images
+    install -Dm644 "${srcdir}/background-1.jpg" "${pkgdir}/usr/share/backgrounds/background-1.jpg"
+    for image in "${srcdir}"/background-*.jpg; do
+       install -Dm644 "${srcdir}/$(basename ${image})" "${pkgdir}/usr/share/backgrounds/$(basename ${image})"
+    done
+
+    # OLD CODE
+    #install -Dm644 "${srcdir}/alter-old.png" "${pkgdir}/usr/share/backgrounds/alter-old.png"
+    #install -Dm644 "${srcdir}/alter-jiju.png" "${pkgdir}/usr/share/backgrounds/alter-jiju.png"
+    #install -Dm644 "${srcdir}/alter-nochr.png" "${pkgdir}/usr/share/backgrounds/alter-nochr.png"
+
+    # Install Scripts
+    install -Dm755 "${srcdir}/flag-wallpapers" "${pkgdir}/usr/share/libalpm/scripts/flag-wallpapers"
+
+    # Install hooks
+    local hook
+    for hook in "${srcdir}"/*.hook; do
+        install -Dm644 "${srcdir}/$(basename ${hook})" "${pkgdir}/usr/share/libalpm/hooks/$(basename ${hook})"
+    done
+}
