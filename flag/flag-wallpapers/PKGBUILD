@@ -8,20 +8,12 @@ pkgrel=3
 pkgdesc='Flag Linux wallpapers'
 arch=('any')
 source=("background-1.jpg"
-        "background-2.jpg"
-        "background-3.jpg"
-        "background-4.jpg"
-        "background-5.jpg"
         "${pkgname}"
         "${pkgname}-xfce-blue.hook"
         "${pkgname}-xfce-stripes.hook"
         "${pkgname}-xfce-teal.hook")
 
 sha256sums=('SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
